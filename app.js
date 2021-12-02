@@ -10,12 +10,12 @@ const exchangeBtn = $('.btn-exchange');
 const exchangeIcon = $('.icon-convert');
 
 // Render select 
-const renderSelect = () => {
+const renderOption = () => {
     for (let i = 0; i < dropList.length; i++) {
-        for (currentCode in country_list) {
-            let selected = i == 0 ? currentCode == "USD" ? "selected" : "" : currentCode == "VND" ? "selected" : "";
+        for (currentCountry in country_list) {
+            let selected = i == 0 ? currentCountry == "USD" ? "selected" : "" : currentCountry == "VND" ? "selected" : "";
             let optionTag = `
-            <option value="${currentCode}" ${selected}>${currentCode}</option>
+            <option value="${currentCountry}" ${selected}>${currentCountry}</option>
             `
             dropList[i].insertAdjacentHTML("beforeend", optionTag);
         }
@@ -27,16 +27,16 @@ const renderSelect = () => {
 
 // Load flag country
 const loadFlag = element => {
-    for (code in country_list) {
-        if (code == element.value) {
+    for (key in country_list) {
+        if (key == element.value) {
             const imgTag = element.parentElement.querySelector("img");
-            imgTag.src = `https://flagcdn.com/48x36/${country_list[code].toLowerCase()}.png`
+            imgTag.src = `https://flagcdn.com/48x36/${country_list[key].toLowerCase()}.png`
         }
     }
 }
 
 // Render on load
-renderSelect();
+renderOption();
 
 const convertCountry = () => {
     let tempCode = fromCurrency.value;
@@ -46,10 +46,6 @@ const convertCountry = () => {
     loadFlag(toCurrency);
     getExchangeRate();
 }
-
-// Event click exchange icon
-exchangeIcon.addEventListener('click', convertCountry);
-
 
 const getExchangeRate = async() => {
     // Default value = 1
@@ -63,13 +59,17 @@ const getExchangeRate = async() => {
         const response = await axios.get(apiUrl)
         const rateList = response.data.conversion_rates;
         const exchangeRate = toCurrency.value;
-        let totalExRate = (amountInput.value * rateList[exchangeRate]).toFixed(2);
+        const total = (amountInput.value * rateList[exchangeRate]);
+        const totalExRate = total >= 1 ? total.toFixed(2) : total.toFixed(5);
         textExchange.innerText = `${amountInput.value} ${fromCurrency.value} = ${totalExRate} ${toCurrency.value}`;
     } catch (error) {
         // If api error 
         textExchange.innerText = 'Something went wrong';
     }
 }
+
+// Event click exchange icon
+exchangeIcon.addEventListener('click', convertCountry);
 
 // Event load to check rate
 window.addEventListener('load', getExchangeRate);
