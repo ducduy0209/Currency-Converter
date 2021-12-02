@@ -30,13 +30,14 @@ const loadFlag = element => {
     for (key in country_list) {
         if (key == element.value) {
             const imgTag = element.parentElement.querySelector("img");
-            imgTag.src = `https://flagcdn.com/48x36/${country_list[key].toLowerCase()}.png`
+            imgTag.src = `https://flagcdn.com/48x36/${country_list[key].toLowerCase()}.png`;
         }
     }
 }
 
 // Render on load
 renderOption();
+
 
 const convertCountry = () => {
     let tempCode = fromCurrency.value;
@@ -56,7 +57,7 @@ const getExchangeRate = async() => {
     textExchange.innerText = "Getting exchange rate....";
     try {
         const apiUrl = `https://v6.exchangerate-api.com/v6/174cc3231a6d86444de77333/latest/${fromCurrency.value}`;
-        const response = await axios.get(apiUrl)
+        const response = await axios.get(apiUrl);
         const rateList = response.data.conversion_rates;
         const exchangeRate = toCurrency.value;
         const total = (amountInput.value * rateList[exchangeRate]);
