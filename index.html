@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Converter</title>
+    <link rel="shortcut icon" href="./favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link href="https://kit-pro.fontawesome.com/releases/v5.15.4/css/pro.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="box-content">
+            <h2>Currency Converter</h2>
+            <p>Enter Amount</p>
+            <input type="text" value="1">
+            <div class="box-wrapper-select">
+                <div class="box-from">
+                    <p>From</p>
+                    <div class="select-box">
+                        <img src="https://flagcdn.com/48x36/us.png" alt="">
+                        <select></select>
+                    </div>
+                </div>
+                <div class="icon-convert">
+                    <i class="fas fa-exchange"></i>
+                </div>
+                <div class="box-to">
+                    <p>To</p>
+                    <div class="select-box">
+                        <img src="https://flagcdn.com/48x36/vn.png" alt="">
+                        <select></select>
+                    </div>
+                </div>
+            </div>
+            <div class="text-exchange"></div>
+            <button class="btn-exchange">Get Exchange Rate</button>
+        </div>
+    </div>
+    <script src="./country-list.js"></script>
+    <script src="./app.js"></script>
+</body>
+
+</html>
